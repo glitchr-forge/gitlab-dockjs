@@ -135,7 +135,7 @@
                     this.style.height    = height   + "px";
                     this.style.marginRight = marginRight + "px";
                     this.style.marginLeft  = marginLeft  + "px";
-                    this.firstChild.style.marginTop = marginTop + "px";
+                    this.style.marginTop = marginTop + "px";
 
                 } else {
 
