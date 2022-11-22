@@ -1,0 +1,15 @@
+{
+  "name": "@glitchr/dockjs",
+  "version": "1.0.5",
+  "description": "Dock JS library",
+  "main": "index.js",
+  "repository": {
+    "url": "ssh://git@gitlab.glitchr.dev:public-repository/javascript/dockjs.git",
+    "type": "git"
+  },
+  "author": "Marco Meyer <marco.meyer@glitchr.io>",
+  "license": "LGPL-3.0-or-later",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
