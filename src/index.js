@@ -1,3 +1,5 @@
+import './css/index.css';
+
 (function (window) {
 
     window.fn.resizeOnApproach = function (event) {
