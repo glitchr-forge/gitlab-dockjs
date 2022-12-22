@@ -1,6 +1,6 @@
 {
   "name": "@glitchr/dockjs",
-  "version": "1.0.20",
+  "version": "1.0.19",
   "description": "Dock JS library",
   "main": "src/index.js",
   "repository": {
