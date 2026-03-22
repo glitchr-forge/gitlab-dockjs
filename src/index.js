@@ -5,43 +5,43 @@ import './css/index.css';
     window.fn.resizeOnApproach = function (event) {
 
         // Default options
-        var defaultOptions = {y:false, split:1, zoom:1, jump:0, trigger: 1};
+        const defaultOptions = {y:false, split:1, zoom:1, jump:0, trigger: 1};
         event && window.extend(defaultOptions, event);
 
-        var icon = this;
+        const icon = this;
         if( ! $(icon).length ) return;
 
         // Initial parameters
-        var fontSize0 = parseInt($(icon).css("font-size").replace("px", ""));
-        var width0 = parseInt($(icon).css("width").replace("px", ""));
-        var height0 = parseInt($(icon).css("height").replace("px", ""));
-        var borderRadius0 = [
+        const fontSize0 = parseInt($(icon).css("font-size").replace("px", ""));
+        const width0 = parseInt($(icon).css("width").replace("px", ""));
+        const height0 = parseInt($(icon).css("height").replace("px", ""));
+        const borderRadius0 = [
             parseInt($(icon).css("borderTopLeftRadius").replace("px", "")),
             parseInt($(icon).css("borderTopRightRadius").replace("px", "")),
             parseInt($(icon).css("borderBottomRightRadius").replace("px", "")),
             parseInt($(icon).css("borderBottomLeftRadius").replace("px", "")),
         ];
 
-        var margin0 = [
+        const margin0 = [
             parseInt($(icon).css("margin-top").replace("px", "")),
             parseInt($(icon).css("margin-right").replace("px", "")),
             parseInt($(icon).css("margin-bottom").replace("px", "")),
             parseInt($(icon).css("margin-left").replace("px", ""))
         ]
 
-        var trigger0 = 3 * ((defaultOptions.y == false) ? width0:height0)
+        const trigger0 = 3 * ((defaultOptions.y === false) ? width0 : height0)
                          * defaultOptions.zoom * defaultOptions.trigger;
 
         // Main variables
-        var i = ((defaultOptions.y == false) ? width0:height0)*defaultOptions.zoom - ((defaultOptions.y == false) ? width0:height0),
-            k = i / trigger0;
+        const i = ((defaultOptions.y === false) ? width0 : height0) * defaultOptions.zoom - ((defaultOptions.y === false) ? width0 : height0),
+              k = i / trigger0;
 
         // Initialization force some properties to fix values
         window(document).ready(function () {
 
             icon.each(function () {
 
-                if(defaultOptions.y == false) { // X axis
+                if(defaultOptions.y === false) { // X axis
 
                     this.style.top      = 0 + "px";
                     this.style.fontSize = (fontSize0) + "px";
@@ -75,20 +75,20 @@ import './css/index.css';
         // Dynamic dock
         window(document).mousemove(function (mouse) {
 
-            var x0 = mouse.pageX,
-                y0 = mouse.pageY;
+            const x0 = mouse.pageX,
+                  y0 = mouse.pageY;
 
             // Process each icon
             icon.each(function() {
 
                 // Main parameters
-                var offset = window(this).offset();
-                var x = offset.left, y = offset.top;
-                var w  = $(this).width(), h = $(this).height();
+                const offset = window(this).offset();
+                const x = offset.left, y = offset.top;
+                const w  = $(this).width(), h = $(this).height();
 
-                var magnification = 1;
-                var height = height0, width = width0;
-                if(defaultOptions.y == false) {
+                let magnification = 1;
+                let height = height0, width = width0;
+                if(defaultOptions.y === false) {
 
                     // Compute distance & magnification
                     width = distToSqEdge(w, x+w/2, y+h/2, x0, y0);
@@ -115,9 +115,9 @@ import './css/index.css';
                 }
 
                 // Compute magnified parameters
-                var fontSize    = parseInt(fontSize0 * magnification);
-                var split       = parseInt(((defaultOptions.y == false) ? width0:height0) * defaultOptions.split);
-                var jump        = parseInt(height0*defaultOptions.jump * (1-magnification));
+                const fontSize = parseInt(fontSize0 * magnification);
+                const split    = parseInt(((defaultOptions.y === false) ? width0 : height0) * defaultOptions.split);
+                const jump     = parseInt(height0*defaultOptions.jump * (1-magnification));
 
                 this.style.borderTopLeftRadius     = borderRadius0[0]*(magnification) + "px";
                 this.style.borderTopRightRadius    = borderRadius0[1]*(magnification) + "px";
@@ -125,11 +125,11 @@ import './css/index.css';
                 this.style.borderBottomLeftRadius  = borderRadius0[3]*(magnification) + "px";
 
                 // Apply settings
-                if(defaultOptions.y == false) {
+                if(defaultOptions.y === false) {
 
-                    var marginRight = -split/2*(1 - magnification) + margin0[1]*(magnification);
-                    var marginLeft  = -split/2*(1 - magnification) + margin0[3]*(magnification);
-                    var marginTop   = -fontSize0 * (1-magnification);
+                    const marginRight = -split/2*(1 - magnification) + margin0[1]*(magnification);
+                    const marginLeft  = -split/2*(1 - magnification) + margin0[3]*(magnification);
+                    const marginTop   = -fontSize0 * (1-magnification);
 
                     this.style.fontSize  = fontSize + "px";
                     this.style.top       = jump     + "px";
@@ -141,8 +141,8 @@ import './css/index.css';
 
                 } else {
 
-                    var marginTop = -split/2*(1 - magnification) + margin0[0]*(magnification);
-                    var marginBottom  = -split/2*(1 - magnification) + margin0[2]*(magnification);
+                    const marginTop    = -split/2*(1 - magnification) + margin0[0]*(magnification);
+                    const marginBottom = -split/2*(1 - magnification) + margin0[2]*(magnification);
 
                     this.style.fontSize  = fontSize + "px";
                     this.style.left       = jump     + "px";
@@ -159,18 +159,18 @@ import './css/index.css';
 
 
 function distToSqEdge(d, c, a, f, g) {
-    vx = f - c;
-    vy = g - a;
-    a = c = 0;
+    const vx = f - c;
+    const vy = g - a;
+    let cx = 0, ay = 0;
     if (vx > vy)
-        if (vx > -vy) c = 1;
-        else a = 1;
-    else if (vx > -vy) a = -1;
-    else c = -1;
-    vlength = Math.sqrt(vx * vx + vy * vy);
-    vux = vx / vlength;
-    vuy = vy / vlength;
-    cosA = vux * c + vuy * a;
-    centreToSqEdge = Math.abs(0.5 * d / cosA);
-    return mouseToSquareEdge = vlength - centreToSqEdge
-};
+        if (vx > -vy) cx = 1;
+        else ay = 1;
+    else if (vx > -vy) ay = -1;
+    else cx = -1;
+    const vlength = Math.sqrt(vx * vx + vy * vy);
+    const vux = vx / vlength;
+    const vuy = vy / vlength;
+    const cosA = vux * cx + vuy * ay;
+    const centreToSqEdge = Math.abs(0.5 * d / cosA);
+    return vlength - centreToSqEdge;
+}
