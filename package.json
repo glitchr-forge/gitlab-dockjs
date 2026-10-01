@@ -4,8 +4,8 @@
   "description": "Dock JS library",
   "main": "src/index.js",
   "repository": {
-    "url": "ssh://git@gitlab.glitchr.dev:public-repository/javascript/dockjs.git",
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/glitchr-studio/dockjs.git"
   },
   "author": "Marco Meyer <marco.meyer@glitchr.io>",
   "license": "LGPL-3.0-or-later",
